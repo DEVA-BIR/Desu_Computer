@@ -1,5 +1,5 @@
 import react from 'react'
-import {useState } from 'react'
+import {useState,useEffect} from 'react'
 import {Routes, Route} from 'react-router'
 import Home from './MarkUp/Pages/Home'
 import Login from './MarkUp/Pages/Login'
@@ -16,21 +16,27 @@ import ManagerMenu from './MarkUp/Component/Admin/ManagerMenu'
 import EmployeeMenu from './MarkUp/Component/Admin/EmployeeMenu'
 import Orders from './MarkUp/Pages/Orders'
 import Adminstarator from './MarkUp/Component/Adminstarator'
+import Recycle from './MarkUp/Component/Recycle'
 import Managerial from './MarkUp/Component/Managerial'
 import Employeer from './MarkUp/Component/Employeer'
 import AdminService from './MarkUp/Component/Admin/AdminService'
 import ServiceDetails from './MarkUp/Component/Admin/Servicesdetails'
 import OrderEdit from './MarkUp/EditPage/OrderEdit'
+import DeviceEdit from './MarkUp/EditPage/DeviceEdit'
 import CustomerEdit from './MarkUp/EditPage/CustomerEdit' 
 import EmployeeEdit from './MarkUp/EditPage/EmployeeEdit'
-
+import OrderRecycleBin from "./MarkUp/RecycleBin/OrderRecycleBin";
+import ServiceRecycleBin from "./MarkUp/RecycleBin/ServiceRecycleBin";
+import EmployeeRecycleBin from "./MarkUp/RecycleBin/EmployeeRecycleBin";
+import CustomerRecycleBin from "./MarkUp/RecycleBin/CustomerRecycleBin";
+import DeviceRecycleBin from "./MarkUp/RecycleBin/DeviceRecycleBin";
 //import css
 import '../src/assets/Template-asset/css/bootstrap.css'
 import '../src/assets/Template-asset/css/style.css'
 import '../src/assets/Template-asset/css/responsive.css'
 import '../src/assets/Template-asset/css/color.css'
 import '../src/assets/style/Custom.css'
-//import '../src/assets/style/technology-theme.css'
+import '../src/assets/style/technology-theme.css'
 import Header from '../src/MarkUp/Component/Header/Header'
 import Footer from '../src/MarkUp/Component/Footer/Footer'
 import Services from '../src/MarkUp/Pages/Services'
@@ -41,13 +47,15 @@ import DeviceInfo from './MarkUp/Component/DeviceInfo'
 function App() {
 return (
   <>
-  < Header />
+  <Header
+      />
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/services' element={<Services />} />
       <Route path='/about' element={<About />} />
       <Route path='/contact' element={<Contact />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/admin/recyclebin' element={<Recycle />} />
       <Route path='/admin' element={<Adminstarator />} />
       <Route path='/managerial' element={<Managerial />} />
       <Route path='/employeer' element={<Employeer />} />
@@ -63,7 +71,7 @@ return (
           } />
           <Route path="/admin/Order"
           element={
-            <PrivateAuthRoute roles={[1,2, 3]}>
+            <PrivateAuthRoute roles={[1,2,3]}>
               <Order />
             </PrivateAuthRoute>
           } />
@@ -103,6 +111,12 @@ return (
               <OrderEdit />
             </PrivateAuthRoute>
           } />
+          <Route path="/admin/DeviceInfo/edit/:id"
+          element={
+            <PrivateAuthRoute roles={[1,2,3]}>
+              <DeviceEdit />
+            </PrivateAuthRoute>
+          } />
           <Route path="/admin/customer/edit/:id"
           element={
             <PrivateAuthRoute roles={[2,3]}>
@@ -115,6 +129,52 @@ return (
               <EmployeeEdit />
             </PrivateAuthRoute>
           } />
+          <Route
+  path="/admin/recyclebin/order"
+  element={
+  <PrivateAuthRoute roles={[3]}> 
+  <OrderRecycleBin />
+  
+  </PrivateAuthRoute>
+  }
+
+/>
+
+<Route
+  path="/admin/recyclebin/AdminService"
+  element={
+    <PrivateAuthRoute roles={[3]}>  
+    <ServiceRecycleBin />
+    </PrivateAuthRoute>
+  }
+/>
+
+<Route
+  path="/admin/recyclebin/employees"
+  element={
+    <PrivateAuthRoute roles={[3]}>  
+    <EmployeeRecycleBin />
+    </PrivateAuthRoute>
+  }
+/>
+
+<Route
+  path="/admin/recyclebin/customers"
+  element={
+    <PrivateAuthRoute roles={[3]}>  
+    <CustomerRecycleBin />
+    </PrivateAuthRoute>
+  }
+/>
+
+<Route
+  path="/admin/recyclebin/devices"
+  element={
+    <PrivateAuthRoute roles={[3]}>  
+    <DeviceRecycleBin />
+    </PrivateAuthRoute>
+  }
+/>
       <Route path='/admin/employees' element={<Employees />} />
       <Route path='/unauthorized' element={<Unauthorized />} />
     </Routes>

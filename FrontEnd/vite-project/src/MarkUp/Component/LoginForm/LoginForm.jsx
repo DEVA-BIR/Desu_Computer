@@ -1,147 +1,294 @@
+
 import React, { useState } from 'react';
+
 import { useNavigate, useLocation } from "react-router-dom";
+
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import loginService from '../../../Services/login.service';
 
 function LoginForm() {
+
   const navigate = useNavigate();
+
   const location = useLocation();
+
   const [employee_email, setEmail] = useState('');
+
   const [employee_password, setPassword] = useState('');
+
+  const [showPassword, setShowPassword] = useState(false);
+
   const [emailError, setEmailError] = useState('');
+
   const [passwordError, setPasswordError] = useState('');
+
   const [serverError, setServerError] = useState('');
 
- const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  let valid = true;
+    let valid = true;
 
-  // Email validation
-  if (!employee_email) {
+    // Email validation
+    if (!employee_email) {
 
-    setEmailError('Please enter your email address first');
-    valid = false;
+      setEmailError('Please enter your email address first');
 
-  } else if (!employee_email.includes('@')) {
+      valid = false;
 
-    setEmailError('Invalid email format');
-    valid = false;
-
-  } else {
-
-    const regex = /^\S+@\S+\.\S+$/;
-
-    if (!regex.test(employee_email)) {
+    } else if (!employee_email.includes('@')) {
 
       setEmailError('Invalid email format');
+
       valid = false;
 
     } else {
 
-      setEmailError('');
-    }
-  }
+      const regex = /^\S+@\S+\.\S+$/;
 
-  // Password validation
-  if (!employee_password || employee_password.length < 6) {
+      if (!regex.test(employee_email)) {
 
-    setPasswordError('Password must be at least 6 characters long');
-    valid = false;
+        setEmailError('Invalid email format');
 
-  } else {
+        valid = false;
 
-    setPasswordError('');
-  }
+      } else {
 
-  if (!valid) return;
+        setEmailError('');
 
-  try {
-
-    const formData = {
-      employee_email,
-      employee_password
-    };
-
-    // Login request
-    const response = await loginService.logIn(formData);
-
-    console.log("LOGIN RESPONSE:", response);
-
-    if (response.status === "success") {
-
-  const user = response.data;
-
-  localStorage.setItem(
-    "employee",
-    JSON.stringify(user)
-  );
-
-  const role = user.employee_role;
-
-  if (
-    role === "Admin" ||
-    role === "Manager" ||
-    role === 3
-  ) {
-    navigate("/admin");
-  } else {
-    navigate("/");
-  }
-
-  window.location.reload();
-} else {
-
-      setServerError(response.message);
+      }
     }
 
-  } catch (err) {
+    // Password validation
+    if (!employee_password || employee_password.length < 6) {
 
-    console.log(err);
+      setPasswordError('Password must be at least 6 characters long');
 
-    setServerError(
-      "An error has occurred. Please try again later."
-    );
-  }
-};
+      valid = false;
+
+    } else {
+
+      setPasswordError('');
+
+    }
+
+    if (!valid) return;
+
+    try {
+
+      const formData = {
+
+        employee_email,
+
+        employee_password
+
+      };
+
+      // Login request
+      const response = await loginService.logIn(formData);
+
+      console.log("LOGIN RESPONSE:", response);
+
+      if (response.status === "success") {
+
+        const user = response.data;
+
+        localStorage.setItem(
+          "employee",
+          JSON.stringify(user)
+        );
+
+        const role = user.employee_role;
+
+        if (
+          role === "Admin" ||
+          role === "Manager" ||
+          role === 3
+        ) {
+
+          navigate("/admin");
+
+        } else {
+
+          navigate("/");
+
+        }
+
+        window.location.reload();
+
+      } else {
+
+        setServerError(response.message);
+
+      }
+
+    } catch (err) {
+
+      console.log(err);
+
+      setServerError(
+        "An error has occurred. Please try again later."
+      );
+
+    }
+  };
 
   return (
+
     <section className="contact-section">
+
       <div className="auto-container">
+
         <div className="contact-title">
+
           <h2>Login to your account</h2>
+
         </div>
+
         <div className="row clearfix">
+
           <div className="form-column col-lg-7">
+
             <div className="inner-column">
+
               <div className="contact-form">
+
                 <form onSubmit={handleSubmit}>
+
                   <div className="row clearfix">
 
                     <div className="form-group col-md-12">
-                      {serverError && <div className="validation-error" role="alert">{serverError}</div>}
-                      <input type="email" name="employee_email" value={employee_email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
-                      {emailError && <div className="validation-error" role="alert">{emailError}</div>}
+
+                      {serverError && (
+                        <div
+                          className="validation-error"
+                          role="alert"
+                        >
+                          {serverError}
+                        </div>
+                      )}
+
+                      <input
+                        type="email"
+                        name="employee_email"
+                        value={employee_email}
+                        onChange={(event) =>
+                          setEmail(event.target.value)
+                        }
+                        placeholder="Email"
+                      />
+
+                      {emailError && (
+                        <div
+                          className="validation-error"
+                          role="alert"
+                        >
+                          {emailError}
+                        </div>
+                      )}
+
                     </div>
 
                     <div className="form-group col-md-12">
-                      <input type="password" name="employee_password" value={employee_password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
-                      {passwordError && <div className="validation-error" role="alert">{passwordError}</div>}
+
+                      <div
+                        style={{
+                          position: "relative",
+                          width: "100%"
+                        }}
+                      >
+
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          name="employee_password"
+                          value={employee_password}
+                          onChange={(event) =>
+                            setPassword(event.target.value)
+                          }
+                          placeholder="Password"
+                          style={{
+                            paddingRight: "45px"
+                          }}
+                        />
+
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setShowPassword(!showPassword)
+                          }
+                          aria-label={
+                            showPassword
+                              ? "Hide password"
+                              : "Show password"
+                          }
+                          style={{
+                            position: "absolute",
+                            right: "15px",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            border: "none",
+                            background: "transparent",
+                            padding: "0",
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
+                          }}
+                        >
+
+                          {showPassword ? (
+                            <FaEyeSlash />
+                          ) : (
+                            <FaEye />
+                          )}
+
+                        </button>
+
+                      </div>
+
+                      {passwordError && (
+                        <div
+                          className="validation-error"
+                          role="alert"
+                        >
+                          {passwordError}
+                        </div>
+                      )}
+
                     </div>
 
                     <div className="form-group col-md-12">
-                      <button className="theme-btn btn-style-one" type="submit" data-loading-text="Please wait..."><span>Login</span></button>
+
+                      <button
+                        className="theme-btn btn-style-one"
+                        type="submit"
+                        data-loading-text="Please wait..."
+                      >
+                        <span>Login</span>
+                      </button>
+
                     </div>
+
                   </div>
+
                 </form>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
 
       </div>
+
     </section>
+
   );
 }
 
 export default LoginForm;
+

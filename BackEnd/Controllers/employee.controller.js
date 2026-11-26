@@ -1,123 +1,242 @@
-// Import the employee service 
-const employeeService = require('../Services/employee.service');
+const employeeService = require("../Services/employee.service");
 
-// Create employee
+// =========================================================
+// CREATE EMPLOYEE
+// =========================================================
 async function createEmployee(req, res) {
   try {
-    const employeeExists = await employeeService.checkIfEmployeeExists(
-      req.body.employee_email
-    );
+    const employeeExists =
+      await employeeService.checkIfEmployeeExists(
+        req.body.employee_email
+      );
 
     if (employeeExists) {
       return res.status(400).json({
-        error: "This email address is already associated with another employee!"
+        success: false,
+        error:
+          "This email address is already associated with another employee!",
       });
     }
 
-    const employee = await employeeService.createEmployee(req.body);
+    const employee =
+      await employeeService.createEmployee(req.body);
 
     if (!employee) {
       return res.status(400).json({
-        error: "Failed to add the employee!"
+        success: false,
+        error: "Failed to add the employee!",
       });
     }
 
     return res.status(201).json({
+      success: true,
       status: "success",
-      message: "Employee created successfully"
+      message: "Employee created successfully",
+      data: employee,
     });
-
   } catch (error) {
-    console.error(error);
+    console.error(
+      "CREATE EMPLOYEE CONTROLLER ERROR:",
+      error
+    );
 
     return res.status(500).json({
-      error: "Something went wrong!"
+      success: false,
+      error:
+        error.message ||
+        "Something went wrong!",
     });
   }
 }
 
-
-// Get all employees
+// =========================================================
+// GET ALL ACTIVE EMPLOYEES
+// =========================================================
 async function getAllEmployees(req, res) {
   try {
-    const employees = await employeeService.getAllEmployees();
-
-    if (!employees) {
-      return res.status(400).json({
-        error: "Failed to get all employees!"
-      });
-    }
+    const employees =
+      await employeeService.getAllEmployees();
 
     return res.status(200).json({
+      success: true,
       status: "success",
-      data: employees
+      data: employees || [],
     });
-
   } catch (error) {
-    console.error(error);
+    console.error(
+      "GET ALL EMPLOYEES ERROR:",
+      error
+    );
 
     return res.status(500).json({
-      error: "Something went wrong!"
+      success: false,
+      error:
+        error.message ||
+        "Failed to get employees",
     });
   }
 }
 
-
-// ✅ FIXED: Update Employee (NOW SUPPORTS ROLE)
+// =========================================================
+// UPDATE EMPLOYEE
+// =========================================================
 async function updateEmployee(req, res) {
   try {
     const employeeId = req.params.id;
 
-    const updated = await employeeService.updateEmployee(
+    await employeeService.updateEmployee(
       employeeId,
       req.body
     );
 
-    if (!updated) {
-      return res.status(400).json({
-        error: "Failed to update employee"
-      });
-    }
-
     return res.status(200).json({
-      message: "Employee updated successfully"
+      success: true,
+      message: "Employee updated successfully",
     });
-
   } catch (error) {
-    console.log(error);
+    console.error(
+      "UPDATE EMPLOYEE ERROR:",
+      error
+    );
 
     return res.status(500).json({
-      error: "Update failed"
+      success: false,
+      error:
+        error.message ||
+        "Update failed",
     });
   }
 }
 
-
-// DELETE EMPLOYEE
+// =========================================================
+// SOFT DELETE EMPLOYEE
+// =========================================================
 async function deleteEmployee(req, res) {
   try {
     const employeeId = req.params.id;
 
-    await employeeService.deleteEmployee(employeeId);
+    await employeeService.deleteEmployee(
+      employeeId
+    );
 
     return res.status(200).json({
-      message: "Employee deleted successfully"
+      success: true,
+      message:
+        "Employee moved to Recycle Bin successfully",
     });
-
   } catch (error) {
-    console.log(error);
+    console.error(
+      "DELETE EMPLOYEE ERROR:",
+      error
+    );
 
     return res.status(500).json({
-      error: "Delete failed"
+      success: false,
+      error:
+        error.message ||
+        "Delete failed",
     });
   }
 }
 
+// =========================================================
+// GET DELETED EMPLOYEES
+// =========================================================
+async function getDeletedEmployees(req, res) {
+  try {
+    const employees =
+      await employeeService.getDeletedEmployees();
 
-// Export controllers
+    return res.status(200).json({
+      success: true,
+      data: employees || [],
+    });
+  } catch (error) {
+    console.error(
+      "GET DELETED EMPLOYEES ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      error:
+        error.message ||
+        "Failed to get deleted employees",
+    });
+  }
+}
+
+// =========================================================
+// RESTORE EMPLOYEE
+// =========================================================
+async function restoreEmployee(req, res) {
+  try {
+    const employeeId = req.params.id;
+
+    await employeeService.restoreEmployee(
+      employeeId
+    );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "Employee restored successfully",
+    });
+  } catch (error) {
+    console.error(
+      "RESTORE EMPLOYEE ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      error:
+        error.message ||
+        "Failed to restore employee",
+    });
+  }
+}
+
+// =========================================================
+// PERMANENT DELETE EMPLOYEE
+// =========================================================
+async function permanentDeleteEmployee(req, res) {
+  try {
+    const employeeId = req.params.id;
+
+    await employeeService.permanentDeleteEmployee(
+      employeeId
+    );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "Employee permanently deleted successfully",
+    });
+  } catch (error) {
+    console.error(
+      "PERMANENT DELETE EMPLOYEE ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      error:
+        error.message ||
+        "Failed to permanently delete employee",
+    });
+  }
+}
+
+// =========================================================
+// EXPORT
+// =========================================================
 module.exports = {
   createEmployee,
   getAllEmployees,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
+  getDeletedEmployees,
+  restoreEmployee,
+  permanentDeleteEmployee,
 };

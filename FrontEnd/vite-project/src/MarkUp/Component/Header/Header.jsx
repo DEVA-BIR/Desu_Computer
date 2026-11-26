@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../../assets/Template-asset/images/DESU_Last.jpeg'; // Adjust the path to your logo image   
+import Logo from '../../../assets/Template-asset/images/desu logo.png';
 import { useAuth } from '../../../Context/AuthContxt.jsx';
 import loginService from '../../../Services/login.service.jsx';
 
-
-function Header() {
+function Header({ theme, toggleTheme }) {
   const { isLogged, setIsLogged, employee } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -30,35 +29,55 @@ function Header() {
   return (
     <div>
       <header className="main-header header-style-one">
+
         {/* Top Bar */}
         <div className="header-top">
           <div className="auto-container">
             <div className="inner-container">
+
               <div className="left-column">
-                <div className="text">#Smart Repairs. Smart Solutions.</div>
-                <div className="office-hour">Sunday - Sunday 24 hrs</div>
+                <div className="text">
+                  #Smart Repairs. Smart Solutions.
+                </div>
+
+                <div className="office-hour">
+                  <strong>24/7 Service Available</strong>
+                </div>
               </div>
-             <div className={`right-column ${isMobileMenuOpen ? "menu-open" : ""}`}>
+
+              <div
+                className={`right-column ${
+                  isMobileMenuOpen ? 'menu-open' : ''
+                }`}
+              >
                 {isLogged ? (
                   <div className="link-btn">
                     <div className="phone-number">
-                      <strong>Welcome {employee?.employee_first_name}</strong>
+                      <strong>
+                        Welcome {employee?.employee_first_name}
+                      </strong>
                     </div>
                   </div>
                 ) : (
                   <div className="phone-number">
-                    Schedule Appointment: <strong>+251940066308</strong>
+                    Schedule Appointment:{' '}
+                    <strong>+251940066308</strong>
                   </div>
                 )}
               </div>
+
             </div>
           </div>
         </div>
 
+
         {/* Main Header Area */}
         <div className="header-upper">
           <div className="auto-container">
+
             <div className="inner-container">
+
+              {/* Logo */}
               <div className="logo-box">
                 <div className="logo">
                   <Link to="/" onClick={closeMobileMenu}>
@@ -67,11 +86,16 @@ function Header() {
                 </div>
               </div>
 
+
               <div className="right-column">
+
                 <div className="nav-outer">
+
                   {/* Hamburger Toggle Button */}
-                  <div 
-                    className={`mobile-nav-toggler ${isMobileMenuOpen ? 'active' : ''}`} 
+                  <div
+                    className={`mobile-nav-toggler ${
+                      isMobileMenuOpen ? 'active' : ''
+                    }`}
                     onClick={toggleMobileMenu}
                   >
                     <span className="bar"></span>
@@ -79,86 +103,149 @@ function Header() {
                     <span className="bar"></span>
                   </div>
 
-                  {/* Navigation Menu Dropdown */}
-                  <nav className={`main-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+
+                  {/* Navigation Menu */}
+                  <nav
+                    className={`main-menu ${
+                      isMobileMenuOpen ? 'open' : ''
+                    }`}
+                  >
                     <ul className="navigation">
-    <li><Link to="/" onClick={closeMobileMenu}>Home</Link></li>
 
-    <li><Link to="/about" onClick={closeMobileMenu}>About</Link></li>
+                      <li>
+                        <Link to="/" onClick={closeMobileMenu}>
+                          Home
+                        </Link>
+                      </li>
 
-    <li><Link to="/services" onClick={closeMobileMenu}>Services</Link></li>
+                      <li>
+                        <Link to="/about" onClick={closeMobileMenu}>
+                          About
+                        </Link>
+                      </li>
 
-    <li><Link to="/contact" onClick={closeMobileMenu}>Contact</Link></li>
+                      <li>
+                        <Link to="/services" onClick={closeMobileMenu}>
+                          Services
+                        </Link>
+                      </li>
 
-    {isAdmin && (
-        <li>
-            <Link to="/admin" onClick={closeMobileMenu}>
-                Admin
-            </Link>
-        </li>
-    )}
-     {isManager && (
-        <li>
-            <Link to="/managerial" onClick={closeMobileMenu}>
-                Manager
-            </Link>
-        </li>
-    )}
-     {isEmployee && (
-        <li>
-            <Link to="/employeer" onClick={closeMobileMenu}>
-                Employee
-            </Link>
-        </li>
-    )}
+                      <li>
+                        <Link to="/contact" onClick={closeMobileMenu}>
+                          Contact
+                        </Link>
+                      </li>
 
-    <li className="mobile-login">
 
-        {isLogged ? (
+                      {isAdmin && (
+                        <li>
+                          <Link
+                            to="/admin"
+                            onClick={closeMobileMenu}
+                          >
+                            Admin
+                          </Link>
+                        </li>
+                      )}
 
-            <Link
-                to="/"
-                className="theme-btn btn-style-one blue"
-                onClick={logOut}
-            >
-                Log Out
-            </Link>
 
-        ) : (
+                      {isManager && (
+                        <li>
+                          <Link
+                            to="/managerial"
+                            onClick={closeMobileMenu}
+                          >
+                            Manager
+                          </Link>
+                        </li>
+                      )}
 
-            <Link
-                to="/login"
-                className="theme-btn btn-style-one"
-                onClick={closeMobileMenu}
-            >
-                Login
-            </Link>
 
-        )}
+                      {isEmployee && (
+                        <li>
+                          <Link
+                            to="/employeer"
+                            onClick={closeMobileMenu}
+                          >
+                            Employee
+                          </Link>
+                        </li>
+                      )}
 
-    </li>
 
-</ul>
+                      {/* Mobile Login / Logout */}
+                      <li className="mobile-login">
+
+                        {isLogged ? (
+
+                          <Link
+                            to="/"
+                            className="theme-btn btn-style-one blue"
+                            onClick={logOut}
+                          >
+                            Log Out
+                          </Link>
+
+                        ) : (
+
+                          <Link
+                            to="/login"
+                            className="theme-btn btn-style-one"
+                            onClick={closeMobileMenu}
+                          >
+                            Login
+                          </Link>
+
+                        )}
+
+                      </li>
+
+                    </ul>
                   </nav>
+
                 </div>
+
+
+                {/* Theme Toggle */}
+
 
                 {/* Login / Logout Button */}
                 <div className="auth-btn-container">
+
                   {isLogged ? (
+
                     <div className="link-btn">
-                      <Link to="/" className="theme-btn btn-style-one blue" onClick={logOut}>Log out</Link>
+                      <Link
+                        to="/"
+                        className="theme-btn btn-style-one blue"
+                        onClick={logOut}
+                      >
+                        Log out
+                      </Link>
                     </div>
+
                   ) : (
+
                     <div className="link-btn">
-                      <Link to="/login" className="theme-btn btn-style-one" onClick={closeMobileMenu}>Login</Link>
+                      <Link
+                        to="/login"
+                        className="theme-btn btn-style-one"
+                        onClick={closeMobileMenu}
+                      >
+                        Login
+                      </Link>
                     </div>
+
                   )}
+
                 </div>
+
               </div>
 
             </div>
           </div>
         </div>
+
       </header>
     </div>
   );

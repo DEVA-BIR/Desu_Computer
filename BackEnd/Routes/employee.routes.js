@@ -1,16 +1,89 @@
-const express = require('express');
-// Call the router method from express to create the router 
+const express = require("express");
+
 const router = express.Router();
-// Import the employee controller
-const employeeController = require('../Controllers/employee.controller');
-// Import middleware 
+
+const employeeController = require("../Controllers/employee.controller");
+
 const authMiddleware = require("../middlewares/auth.middleware");
-// Create a route to handle the add employee request on post
+
+// =========================================================
+// CREATE EMPLOYEE
+// =========================================================
 router.post(
-  "/employees", 
+  "/employees",
   employeeController.createEmployee
 );
-router.put("/employees/:id", employeeController.updateEmployee);
-router.delete("/employees/:id", employeeController.deleteEmployee);
-router.get("/employees", [authMiddleware.verifyToken, authMiddleware.isAdmin], employeeController.getAllEmployees);
+
+// =========================================================
+// GET ALL ACTIVE EMPLOYEES
+// =========================================================
+router.get(
+  "/employees",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.isAdmin,
+  ],
+  employeeController.getAllEmployees
+);
+
+// =========================================================
+// UPDATE EMPLOYEE
+// =========================================================
+router.put(
+  "/employees/:id",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.isAdmin,
+  ],
+  employeeController.updateEmployee
+);
+
+// =========================================================
+// SOFT DELETE → RECYCLE BIN
+// =========================================================
+router.delete(
+  "/employees/:id",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.isAdmin,
+  ],
+  employeeController.deleteEmployee
+);
+
+// =========================================================
+// GET RECYCLE BIN
+// =========================================================
+router.get(
+  "/employees/recycle-bin",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.isAdmin,
+  ],
+  employeeController.getDeletedEmployees
+);
+
+// =========================================================
+// RESTORE
+// =========================================================
+router.patch(
+  "/employees/:id/restore",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.isAdmin,
+  ],
+  employeeController.restoreEmployee
+);
+
+// =========================================================
+// PERMANENT DELETE
+// =========================================================
+router.delete(
+  "/employees/:id/permanent",
+  [
+    authMiddleware.verifyToken,
+    authMiddleware.isAdmin,
+  ],
+  employeeController.permanentDeleteEmployee
+);
+
 module.exports = router;

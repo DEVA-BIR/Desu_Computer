@@ -71,7 +71,7 @@ const AdminServices = () => {
       await loadServices();
 
       // SUCCESS MESSAGE
-      setMessage("Service deleted successfully");
+      setMessage("Service moved to recycle bin successfully");
       setMessageType("success");
 
     } catch (error) {

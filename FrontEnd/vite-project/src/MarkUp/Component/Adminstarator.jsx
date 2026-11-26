@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../Context/AuthContxt';
-import AdminMenu from "../Component/Admin/AdminMenu";
+//import AdminMenu from "../Component/Admin/AdminMenu";
+import RecycleMenu from "../Component/Admin/Recyclemenu";
 import LoginForm from '../Component/LoginForm/LoginForm';
 import AdminDashBoard from './AdminDashBoard';
 
@@ -18,7 +19,7 @@ import AdminDashBoard from './AdminDashBoard';
           <div className="container-fluid admin-pages">
             <div className="row">
               <div className="col-md-3 admin-left-side">
-                <AdminMenu />
+                <RecycleMenu />
               </div>
               <div className="col-md-9 admin-right-side">
                 <AdminDashBoard />

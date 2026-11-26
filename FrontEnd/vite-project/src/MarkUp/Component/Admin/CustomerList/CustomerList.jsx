@@ -210,7 +210,7 @@ const filteredCustomers = customers.filter((customer) => {
                   </tr>
                 </thead>
 
-                <tbody>                {currentCustomers.length > 0 ? (
+                <tbody>{currentCustomers.length > 0 ? (
                   currentCustomers.map((customer, index) => (
                     <tr key={customer.customer_id}>
                       <td>{startIndex + index + 1}</td>

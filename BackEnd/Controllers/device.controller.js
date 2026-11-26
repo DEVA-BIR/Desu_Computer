@@ -87,8 +87,168 @@ async function deletedevice(req, res) {
     });
   }
 }
+// GET SINGLE DEVICE
+async function getSingleDevice(req, res) {
+
+  try {
+
+    const device = await deviceService.getSingleDevice(req.params.id);
+
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        message: "Device not found"
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: device
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
+}
+
+
+// UPDATE DEVICE
+async function updateDevice(req, res) {
+
+  try {
+
+    await deviceService.updateDevice(
+      req.params.id,
+      req.body
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Device updated successfully"
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
+}
+// =========================================================
+// GET DELETED DEVICES
+// =========================================================
+async function getDeletedDevices(req, res) {
+
+  try {
+
+    const devices =
+      await deviceService.getDeletedDevices();
+
+    return res.status(200).json({
+      success: true,
+      data: devices,
+    });
+
+  } catch (error) {
+
+    console.error(
+      "GET DELETED DEVICES ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      error: "Failed to get deleted devices",
+    });
+  }
+}
+
+
+// =========================================================
+// RESTORE DEVICE
+// =========================================================
+async function restoreDevice(req, res) {
+
+  try {
+
+    await deviceService.restoreDevice(
+      req.params.id
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Device restored successfully",
+    });
+
+  } catch (error) {
+
+    console.error(
+      "RESTORE DEVICE ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      error:
+        error.message ||
+        "Failed to restore device",
+    });
+  }
+}
+
+
+// =========================================================
+// PERMANENT DELETE DEVICE
+// =========================================================
+async function permanentDeleteDevice(req, res) {
+
+  try {
+
+    await deviceService.permanentDeleteDevice(
+      req.params.id
+    );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "Device permanently deleted successfully",
+    });
+
+  } catch (error) {
+
+    console.error(
+      "PERMANENT DELETE DEVICE ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      error:
+        error.message ||
+        "Failed to permanently delete device",
+    });
+  }
+}
 module.exports = {
   createdevice,
   getdevicesByCustomer,
   deletedevice,
+  getSingleDevice,
+  updateDevice,
+  getDeletedDevices,
+  restoreDevice,
+  permanentDeleteDevice
 };

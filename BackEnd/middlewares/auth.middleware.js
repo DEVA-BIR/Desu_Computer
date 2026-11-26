@@ -1,59 +1,92 @@
-// Import the dotenv package
-require('dotenv').config();
-// Import the jsonwebtoken package
+require("dotenv").config();
+
 const jwt = require("jsonwebtoken");
-// A function to verify the token received from the frontend 
-// Import the employee service 
 const employeeService = require("../Services/employee.service");
-  
 
-// A function to verify the token received from the frontend 
+// VERIFY TOKEN
 const verifyToken = async (req, res, next) => {
-  let token = req.headers["x-access-token"];
-  if (!token) {
-    return res.status(403).send({
-      status: "fail",
-      message: "No token provided!"
-    });
-  }
+  try {
+    const token = req.headers["x-access-token"];
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).send({
+    if (!token) {
+      return res.status(403).json({
         status: "fail",
-        message: "Unauthorized!"
+        error: "No token provided",
       });
     }
-    // console.log("Here is the decoded token");
-    // console.log(decoded);
-    req.employee_email = decoded.employee_email;
-  
-    next();
-  });
-}
 
-// A function to check if the user is an admin
-const isAdmin = async (req, res, next) => {
-  // let token = req.headers["x-access-token"];
-  console.log(req.employee_email);
- 
-  const employee_email = req.employee_email;
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        console.error("JWT VERIFY ERROR:", err);
 
-  const employee = await employeeService.getEmployeeByEmail(employee_email);
-  
-  if (employee[0].company_role_id === 3) {
-    next();
-  } else {
-    return res.status(403).send({
-      status: "fail",
-      error: "Not an Admin!"
+        return res.status(401).json({
+          status: "fail",
+          error: "Unauthorized!",
+        });
+      }
+
+      req.employee_email = decoded.employee_email;
+
+      next();
+    });
+  } catch (error) {
+    console.error("VERIFY TOKEN ERROR:", error);
+
+    return res.status(500).json({
+      status: "error",
+      error: "Authentication server error",
     });
   }
-}
+};
 
-const authMiddleware = {
+// CHECK ADMIN
+const isAdmin = async (req, res, next) => {
+  try {
+    const employee_email = req.employee_email;
+
+    if (!employee_email) {
+      return res.status(401).json({
+        status: "fail",
+        error: "Employee email not found in token",
+      });
+    }
+
+    console.log("Checking admin:", employee_email);
+
+    const employee =
+      await employeeService.getEmployeeByEmail(employee_email);
+
+    // Employee doesn't exist
+    if (!employee || employee.length === 0) {
+      return res.status(404).json({
+        status: "fail",
+        error: "Employee not found",
+      });
+    }
+
+    console.log("Employee role:", employee[0].company_role_id);
+
+    // Admin role = 3
+    if (employee[0].company_role_id === 3) {
+      return next();
+    }
+
+    return res.status(403).json({
+      status: "fail",
+      error: "Not an Admin!",
+    });
+
+  } catch (error) {
+    console.error("IS ADMIN ERROR:", error);
+
+    return res.status(500).json({
+      status: "error",
+      error: "Failed to verify administrator",
+    });
+  }
+};
+
+module.exports = {
   verifyToken,
-  isAdmin
-}
-
-module.exports = authMiddleware;
+  isAdmin,
+};

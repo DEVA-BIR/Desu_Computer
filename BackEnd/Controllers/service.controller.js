@@ -1,6 +1,10 @@
-const serviceService = require("../Services/service.service");
+const serviceService =
+  require("../Services/service.service");
 
+
+// =====================================================
 // CREATE SERVICE
+// =====================================================
 async function createService(req, res) {
 
   try {
@@ -10,7 +14,7 @@ async function createService(req, res) {
     const result =
       await serviceService.createService(req.body);
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Service added successfully",
       data: result,
@@ -23,14 +27,17 @@ async function createService(req, res) {
       error
     );
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      error: "Server error",
+      message: error.message || "Server error",
     });
   }
 }
 
-// GET ALL SERVICES
+
+// =====================================================
+// GET ALL ACTIVE SERVICES
+// =====================================================
 async function getAllServices(req, res) {
 
   try {
@@ -38,9 +45,7 @@ async function getAllServices(req, res) {
     const services =
       await serviceService.getAllServices();
 
-    console.log("SERVICES:", services);
-
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: services,
     });
@@ -52,14 +57,49 @@ async function getAllServices(req, res) {
       error
     );
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      error: "Server error",
+      message: error.message || "Server error",
     });
   }
 }
 
+
+// =====================================================
+// GET RECYCLE BIN SERVICES
+// =====================================================
+async function getRecycleBinServices(req, res) {
+
+  try {
+
+    const services =
+      await serviceService.getRecycleBinServices();
+
+    return res.status(200).json({
+      success: true,
+      data: services,
+    });
+
+  } catch (error) {
+
+    console.log(
+      "Get Recycle Bin Services Controller Error:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message:
+        error.message ||
+        "Failed to get recycle bin services",
+    });
+  }
+}
+
+
+// =====================================================
 // UPDATE SERVICE
+// =====================================================
 async function updateService(req, res) {
 
   try {
@@ -71,7 +111,7 @@ async function updateService(req, res) {
       req.body
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Service updated successfully",
     });
@@ -83,25 +123,31 @@ async function updateService(req, res) {
       error
     );
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      error: "Server error",
+      message: error.message || "Server error",
     });
   }
 }
 
-// DELETE SERVICE
+
+// =====================================================
+// MOVE SERVICE TO RECYCLE BIN
+// =====================================================
 async function deleteService(req, res) {
 
   try {
 
     const { service_id } = req.params;
 
-    await serviceService.deleteService(service_id);
+    await serviceService.deleteService(
+      service_id
+    );
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
-      message: "Service deleted successfully",
+      message:
+        "Service moved to recycle bin successfully",
     });
 
   } catch (error) {
@@ -111,16 +157,93 @@ async function deleteService(req, res) {
       error
     );
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      error: "Server error",
+      message:
+        error.message ||
+        "Failed to move service to recycle bin",
     });
   }
 }
 
+
+// =====================================================
+// RESTORE SERVICE
+// =====================================================
+async function restoreService(req, res) {
+
+  try {
+
+    const { service_id } = req.params;
+
+    await serviceService.restoreService(
+      service_id
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Service restored successfully",
+    });
+
+  } catch (error) {
+
+    console.log(
+      "Restore Service Controller Error:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message:
+        error.message ||
+        "Failed to restore service",
+    });
+  }
+}
+
+
+// =====================================================
+// PERMANENTLY DELETE SERVICE
+// =====================================================
+async function permanentlyDeleteService(req, res) {
+
+  try {
+
+    const { service_id } = req.params;
+
+    await serviceService.permanentlyDeleteService(
+      service_id
+    );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "Service permanently deleted successfully",
+    });
+
+  } catch (error) {
+
+    console.log(
+      "Permanent Delete Service Controller Error:",
+      error
+    );
+
+    return res.status(400).json({
+      success: false,
+      message:
+        error.message ||
+        "Failed to permanently delete service",
+    });
+  }
+}
+
+
 module.exports = {
   createService,
   getAllServices,
+  getRecycleBinServices,
   updateService,
   deleteService,
+  restoreService,
+  permanentlyDeleteService,
 };

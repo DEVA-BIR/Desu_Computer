@@ -32,7 +32,7 @@ const updateEmployee = async (id, data, token) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "x-access-token": token,
     },
     body: JSON.stringify(data),
   });
@@ -42,7 +42,8 @@ const deleteEmployee = async (id, token) => {
   return fetch(`${api_url}/api/employees/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "x-access-token": token,
     },
   });
 };

@@ -29,9 +29,7 @@ function Contact() {
 
         </div>
 
-        <h1 data-parallax='{"x": 900}'>
-          Desu Computer
-        </h1>
+
       </section>
 
       {/* Contact Section */}
@@ -41,7 +39,7 @@ function Contact() {
 
           <div className="contact-title">
 
-            <h2><h2>Get In Touch</h2></h2>
+            <h2>Get In Touch</h2>
 
             <div className="text">
   Have questions or need technical assistance? Contact Desu Computer Solution today. We're ready to help with computer repairs, mobile services, networking, and IT support.
@@ -165,7 +163,7 @@ function Contact() {
 
                     <span>Phone:</span>
 
-                  +251 911 000 0000 / +2519 897 3654
+                  +251 911 000  / +2519 897 3654
                   </li>
 
                 </ul>
@@ -186,7 +184,7 @@ function Contact() {
         <div className="contact-map">
 
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11307.438772663172!2d38.76120563631354!3d9.02610558504024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2set!4v1780487076917!5m2!1sen!2set"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.8904639921548!2d37.86579485376603!3d8.982226142243016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164d07d07a13f4ed%3A0x70d06cfa96a6b0ac!2sDesu%20Computer%20solution!5e0!3m2!1sen!2set!4v1786176537837!5m2!1sen!2set"
             style={{
               border: 0,
               width: "200%",

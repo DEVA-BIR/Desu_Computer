@@ -8,7 +8,7 @@
 .signin-signout a {
   color: #fff;
 }
-/* Placeholder style */
+/* Placeholder style */ 
 input::placeholder, textarea::placeholder {
   font-weight: 400;
   opacity: 0.3;
@@ -1019,7 +1019,14 @@ background: #dcfce7;
   border-radius: 5px;
   cursor: pointer;
 }
-
+.delet-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .delete-btn:hover {
   background: #c82333;
 }
@@ -1502,7 +1509,7 @@ img{
 .mobile-nav-toggler .bar {
     width: 28px;
     height: 3px;
-    background: #08194a;
+    background: #2ECC71;
     transition: .35s;
     border-radius: 4px;
 }
@@ -1699,4 +1706,1829 @@ img{
 
     background: rgba(0,0,0,.45);
     color: #fff;
+}
+/* ================================
+   RECYCLE BIN — SHARED STYLES
+   Used by:
+   Customer | Employee | Device
+   Service | Order
+================================ */
+
+.recycle-bin {
+  width: 100%;
+  min-height: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #0b0f14;
+  color: #e5e7eb;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.recycle-bin-container {
+  width: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+.recycle-bin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #151a21, #10151c);
+  border: 1px solid #252c36;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+  box-sizing: border-box;
+}
+
+.recycle-bin-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.recycle-bin-title h2 {
+  margin: 0 0 6px;
+  color: #f3f4f6;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.recycle-bin-title p {
+  margin: 0;
+  color: #8b97a8;
+  font-size: 13px;
+}
+
+.recycle-bin-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #f87171;
+  background: rgba(239, 68, 68, .1);
+  border: 1px solid rgba(239, 68, 68, .2);
+  border-radius: 14px;
+  font-size: 24px;
+}
+
+/* COUNT */
+
+.recycle-bin-count {
+  min-width: 120px;
+  padding: 14px 18px;
+  text-align: center;
+  background: rgba(255, 255, 255, .03);
+  border: 1px solid #293548;
+  border-radius: 12px;
+}
+
+.recycle-bin-count strong,
+.recycle-bin-count span {
+  display: block;
+}
+
+.recycle-bin-count strong {
+  color: #f8fafc;
+  font-size: 25px;
+}
+
+.recycle-bin-count span {
+  margin-top: 4px;
+  color: #7f8a9b;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+/* MESSAGE / ERROR */
+
+.recycle-bin-message,
+.recycle-bin-error {
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.recycle-bin-message.success {
+  color: #86efac;
+  background: rgba(34, 197, 94, .08);
+  border: 1px solid rgba(34, 197, 94, .2);
+}
+
+.recycle-bin-message.error,
+.recycle-bin-error {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, .08);
+  border: 1px solid rgba(239, 68, 68, .2);
+}
+
+/* TOOLBAR */
+
+.recycle-bin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+/* SEARCH */
+
+.recycle-bin-search-wrapper {
+  position: relative;
+  width: 350px;
+  flex-shrink: 0;
+}
+
+.recycle-bin-search-wrapper svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #667085;
+  pointer-events: none;
+}
+
+.recycle-bin-search {
+  width: 100%;
+  height: 46px;
+  padding: 0 42px;
+  box-sizing: border-box;
+  outline: none;
+  color: #f3f4f6;
+  background: #0d1218;
+  border: 1px solid #303844;
+  border-radius: 11px;
+  font-size: 13px;
+}
+
+.recycle-bin-search::placeholder {
+  color: #596579;
+}
+
+.recycle-bin-search:focus {
+  border-color: #46556b;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, .06);
+}
+
+/* CLEAR SEARCH */
+
+.recycle-bin-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #8b97a8;
+  cursor: pointer;
+}
+
+/* REFRESH */
+
+.recycle-bin-refresh {
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  color: #dbe3ee;
+  background: #151e2a;
+  border: 1px solid #2a384b;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.recycle-bin-refresh:hover:not(:disabled) {
+  background: #1d2938;
+}
+
+.recycle-bin-refresh:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+/* TABLE */
+
+.recycle-bin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: #101720;
+  border: 1px solid #222e3e;
+  border-radius: 14px;
+}
+
+.recycle-bin-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.recycle-bin-table th {
+  padding: 15px 18px;
+  color: #8490a2;
+  background: #151e2a;
+  border-bottom: 1px solid #293548;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.recycle-bin-table td {
+  padding: 16px 18px;
+  color: #cbd5e1;
+  border-bottom: 1px solid #1e2937;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.recycle-bin-table tbody tr:hover {
+  background: rgba(255, 255, 255, .025);
+}
+
+.recycle-bin-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* COMMON TEXT */
+
+.recycle-bin-id {
+  color: #aeb9c9;
+  font-weight: 600;
+}
+
+.recycle-bin-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.recycle-bin-info strong {
+  color: #f1f5f9;
+  font-size: 14px;
+}
+
+.recycle-bin-info small {
+  color: #7f8b9d;
+  font-size: 11px;
+}
+
+.recycle-bin-description {
+  max-width: 330px;
+  overflow: hidden;
+  color: #8e9aaa;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* STATUS */
+
+.recycle-bin-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, .08);
+  border: 1px solid rgba(239, 68, 68, .2);
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ACTIONS */
+
+.recycle-bin-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.recycle-bin-action {
+  min-height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.recycle-bin-action:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+/* RESTORE */
+
+.recycle-bin-restore {
+  color: #86efac;
+  background: rgba(34, 197, 94, .07);
+  border-color: rgba(34, 197, 94, .2);
+}
+
+.recycle-bin-restore:hover:not(:disabled) {
+  background: rgba(34, 197, 94, .14);
+}
+
+/* DELETE */
+
+.recycle-bin-delete {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, .07);
+  border-color: rgba(239, 68, 68, .2);
+}
+
+.recycle-bin-delete:hover:not(:disabled) {
+  background: rgba(239, 68, 68, .14);
+}
+
+/* LOADING */
+
+.recycle-bin-loading {
+  padding: 70px 20px;
+  text-align: center;
+  color: #9ca3af;
+  background: #11161d;
+  border: 1px solid #252c36;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* EMPTY */
+
+.recycle-bin-empty {
+  padding: 70px 20px;
+  text-align: center;
+  color: #6b7280;
+  background: #11161d;
+  border: 1px solid #252c36;
+  border-radius: 14px;
+}
+
+/* PAGINATION */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  height: 38px;
+  min-width: 75px;
+  padding: 0 12px;
+  color: #cbd5e1;
+  background: #151b23;
+  border: 1px solid #2d3540;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #202833;
+  color: #f3f4f6;
+}
+
+.pagination button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.recycle-bin-page-info {
+  min-width: 90px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+  .recycle-bin {
+    padding: 16px;
+  }
+
+  .recycle-bin-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+  }
+
+  .recycle-bin-search-wrapper {
+    width: 100%;
+  }
+
+  .recycle-bin-refresh {
+    width: 100%;
+  }
+
+  .recycle-bin-table {
+    min-width: 900px;
+  }
+}
+
+@media (max-width: 600px) {
+  .recycle-bin {
+    padding: 10px;
+  }
+
+  .recycle-bin-header {
+    padding: 16px;
+  }
+
+  .recycle-bin-title h2 {
+    font-size: 20px;
+  }
+
+  .recycle-bin-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 21px;
+  }
+
+  .recycle-bin-count {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pagination {
+    gap: 5px;
+  }
+
+  .pagination button {
+    min-width: auto;
+    padding: 0 9px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 450px) {
+  .recycle-bin-title h2 {
+    font-size: 18px;
+  }
+
+  .recycle-bin-title p {
+    font-size: 11px;
+  }
+
+  .recycle-bin-actions {
+    flex-direction: column;
+  }
+
+  .recycle-bin-action {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   SERVICE + ORDER RECYCLE BIN
+   Shared styles
+   Existing interfaces preserved
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.service-recycle-bin,
+.recycle-bin-page {
+  width: 100%;
+  min-height: 100%;
+  padding: 32px;
+  box-sizing: border-box;
+
+  background: #0b0f14;
+  color: #e5e7eb;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.service-recycle-header,
+.recycle-bin-page .recycle-bin-header {
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+
+  padding: 28px 30px;
+  margin-bottom: 24px;
+
+  background: linear-gradient(
+    145deg,
+    #141b26,
+    #0f151e
+  );
+
+  border: 1px solid #263244;
+  border-radius: 18px;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.service-recycle-title,
+.recycle-title {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  min-width: 0;
+}
+
+.service-recycle-icon,
+.recycle-icon {
+  width: 60px;
+  height: 60px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(239, 68, 68, 0.16),
+    rgba(239, 68, 68, 0.06)
+  );
+
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 25px rgba(239, 68, 68, 0.08);
+}
+
+
+/* SERVICE TITLE */
+
+.service-recycle-title h2 {
+  margin: 0 0 7px;
+  color: #f8fafc;
+
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.service-recycle-title p {
+  margin: 0;
+  color: #8b97a8;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* ORDER TITLE */
+
+.recycle-title h1 {
+  margin: 0 0 7px;
+  color: #f8fafc;
+
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.recycle-title p {
+  margin: 0;
+  color: #8b97a8;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   COUNT
+   ========================================================= */
+
+.service-recycle-count,
+.recycle-count {
+  min-width: 135px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px 22px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid #293548;
+  border-radius: 14px;
+}
+
+.service-recycle-count strong,
+.recycle-count span {
+  color: #f8fafc;
+
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.service-recycle-count span,
+.recycle-count small {
+  margin-top: 7px;
+
+  color: #7f8a9b;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+
+/* =========================================================
+   MESSAGE / ERROR
+   ========================================================= */
+
+.service-recycle-message,
+.recycle-error {
+  display: flex;
+  align-items: center;
+
+  min-height: 48px;
+  box-sizing: border-box;
+
+  padding: 12px 16px;
+  margin-bottom: 20px;
+
+  border-radius: 11px;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.service-recycle-message.success {
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.22);
+}
+
+.service-recycle-message.error,
+.recycle-error {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.22);
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.service-recycle-toolbar,
+.recycle-toolbar {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.service-recycle-search,
+.recycle-search {
+  position: relative;
+
+  width: min(430px, 100%);
+
+  display: flex;
+  align-items: center;
+}
+
+.service-recycle-search > svg,
+.search-icon {
+  position: absolute;
+  left: 15px;
+
+  color: #667085;
+  font-size: 14px;
+
+  pointer-events: none;
+  z-index: 2;
+}
+
+.service-recycle-search input,
+.recycle-search input {
+  width: 100%;
+  height: 46px;
+
+  box-sizing: border-box;
+
+  padding: 0 42px;
+
+  outline: none;
+
+  color: #f1f5f9;
+  background: #111821;
+
+  border: 1px solid #273447;
+  border-radius: 11px;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.service-recycle-search input::placeholder,
+.recycle-search input::placeholder {
+  color: #596579;
+}
+
+.service-recycle-search input:hover,
+.recycle-search input:hover {
+  border-color: #354256;
+}
+
+.service-recycle-search input:focus,
+.recycle-search input:focus {
+  background: #131b26;
+  border-color: #46556b;
+
+  box-shadow:
+    0 0 0 3px rgba(148, 163, 184, 0.06);
+}
+
+
+/* =========================================================
+   CLEAR SEARCH
+   ========================================================= */
+
+.clear-search {
+  position: absolute;
+  right: 8px;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  color: #8b97a8;
+  background: transparent;
+
+  border: none;
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  font-size: 20px;
+  line-height: 1;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.clear-search:hover {
+  color: #f8fafc;
+  background: #1d2633;
+}
+
+
+/* =========================================================
+   REFRESH
+   ========================================================= */
+
+.service-refresh-btn,
+.refresh-btn {
+  height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+  padding: 0 19px;
+
+  color: #dbe3ee;
+  background: #151e2a;
+
+  border: 1px solid #2a384b;
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.service-refresh-btn:hover:not(:disabled),
+.refresh-btn:hover:not(:disabled) {
+  background: #1d2938;
+  border-color: #3a4a60;
+
+  transform: translateY(-1px);
+}
+
+.service-refresh-btn:active:not(:disabled),
+.refresh-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.service-refresh-btn:disabled,
+.refresh-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   TABLE CONTAINER
+   ========================================================= */
+
+.service-recycle-table-wrapper,
+.recycle-table-container {
+  width: 100%;
+
+  overflow-x: auto;
+
+  background: #101720;
+
+  border: 1px solid #222e3e;
+  border-radius: 16px;
+
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.service-recycle-table,
+.recycle-table {
+  width: 100%;
+
+  min-width: 760px;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  text-align: left;
+}
+
+
+/* ORDER NEEDS MORE WIDTH */
+
+.recycle-table {
+  min-width: 950px;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.service-recycle-table thead,
+.recycle-table thead {
+  background: #151e2a;
+}
+
+.service-recycle-table th,
+.recycle-table th {
+  padding: 16px 20px;
+
+  color: #8490a2;
+
+  border-bottom: 1px solid #293548;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+
+  white-space: nowrap;
+}
+
+.service-recycle-table th:first-child,
+.recycle-table th:first-child {
+  border-top-left-radius: 16px;
+}
+
+.service-recycle-table th:last-child,
+.recycle-table th:last-child {
+  border-top-right-radius: 16px;
+}
+
+
+/* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+.service-recycle-table td,
+.recycle-table td {
+  padding: 18px 20px;
+
+  color: #cbd5e1;
+
+  border-bottom: 1px solid #1e2937;
+
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.service-recycle-table tbody tr,
+.recycle-table tbody tr {
+  background: transparent;
+
+  transition:
+    background 0.2s ease;
+}
+
+.service-recycle-table tbody tr:hover,
+.recycle-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.service-recycle-table tbody tr:last-child td,
+.recycle-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   SERVICE / ORDER ID
+   ========================================================= */
+
+.service-id,
+.order-number {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 9px;
+
+  color: #aeb9c9;
+  background: #171f2b;
+
+  border: 1px solid #293548;
+  border-radius: 7px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* =========================================================
+   SERVICE NAME
+   ========================================================= */
+
+.service-recycle-table td strong {
+  color: #f1f5f9;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   SERVICE DESCRIPTION
+   ========================================================= */
+
+.service-description {
+  max-width: 330px;
+
+  overflow: hidden;
+
+  color: #8e9aaa;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   ORDER CUSTOMER / DEVICE
+   ========================================================= */
+
+.customer-info,
+.device-info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.customer-info strong,
+.device-info strong {
+  color: #f1f5f9;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.customer-info small,
+.device-info small {
+  color: #7f8b9d;
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.deleted-status,
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 62px;
+
+  padding: 6px 10px;
+  box-sizing: border-box;
+
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.08);
+
+  border: 1px solid rgba(239, 68, 68, 0.20);
+  border-radius: 20px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   ACTION CONTAINER
+   ========================================================= */
+
+.service-recycle-actions,
+.order-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   RESTORE BUTTONS
+   ========================================================= */
+
+.restore-service-btn,
+.restore-btn {
+  min-height: 35px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+  padding: 0 12px;
+
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.07);
+
+  border: 1px solid rgba(34, 197, 94, 0.20);
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.restore-service-btn:hover:not(:disabled),
+.restore-btn:hover:not(:disabled) {
+  color: #bbf7d0;
+
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.35);
+
+  transform: translateY(-1px);
+}
+
+.restore-service-btn:active:not(:disabled),
+.restore-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   DELETE BUTTONS
+   ========================================================= */
+
+.permanent-service-btn,
+.permanent-delete-btn {
+  min-height: 35px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+  padding: 0 12px;
+
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.06);
+
+  border: 1px solid rgba(239, 68, 68, 0.19);
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.permanent-service-btn:hover:not(:disabled),
+.permanent-delete-btn:hover:not(:disabled) {
+  color: #fecaca;
+
+  background: rgba(239, 68, 68, 0.13);
+  border-color: rgba(239, 68, 68, 0.34);
+
+  transform: translateY(-1px);
+}
+
+
+/* DISABLED */
+
+.restore-service-btn:disabled,
+.permanent-service-btn:disabled,
+.restore-btn:disabled,
+.permanent-delete-btn:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.recycle-loading {
+  width: 100%;
+  min-height: 360px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  color: #7f8b9d;
+  background: #101720;
+
+  border: 1px solid #222e3e;
+  border-radius: 16px;
+}
+
+.recycle-loading p {
+  margin: 16px 0 0;
+
+  color: #7f8b9d;
+  font-size: 13px;
+}
+
+.recycle-spinner {
+  width: 36px;
+  height: 36px;
+
+  border: 3px solid #293548;
+  border-top-color: #9ca3af;
+
+  border-radius: 50%;
+
+  animation: recycleSpin 0.8s linear infinite;
+}
+
+@keyframes recycleSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   SERVICE EMPTY
+   ========================================================= */
+
+.service-recycle-empty,
+.recycle-empty {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 75px 25px;
+
+  text-align: center;
+
+  background: #101720;
+
+  border: 1px solid #222e3e;
+  border-radius: 16px;
+}
+
+.empty-recycle-icon,
+.empty-icon {
+  width: 72px;
+  height: 72px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 30px;
+
+  background: #151e2a;
+
+  border: 1px solid #293548;
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+.service-recycle-empty h3,
+.recycle-empty h2 {
+  margin: 0 0 9px;
+
+  color: #f1f5f9;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.service-recycle-empty p,
+.recycle-empty p {
+  max-width: 420px;
+
+  margin: 0 auto 22px;
+
+  color: #778396;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.service-recycle-empty button,
+.recycle-empty button {
+  height: 40px;
+
+  padding: 0 17px;
+
+  color: #dbe3ee;
+  background: #192333;
+
+  border: 1px solid #304057;
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.service-recycle-empty button:hover,
+.recycle-empty button:hover {
+  background: #233047;
+  border-color: #3b4c65;
+}
+
+
+/* =========================================================
+   SERVICE MOBILE
+   ========================================================= */
+
+.service-recycle-mobile {
+  display: none;
+}
+
+.service-recycle-card {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 19px;
+
+  background: linear-gradient(
+    145deg,
+    #121a25,
+    #0f161f
+  );
+
+  border: 1px solid #263244;
+  border-radius: 15px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.service-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #253143;
+}
+
+.service-card-header > div > span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #69778b;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.service-card-header h3 {
+  margin: 0;
+
+  color: #f1f5f9;
+
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.service-card-content {
+  padding: 18px 0;
+}
+
+.service-card-row {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+  margin-bottom: 17px;
+}
+
+.service-card-row:last-child {
+  margin-bottom: 0;
+}
+
+.service-card-row > span {
+  color: #68768a;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.service-card-row strong {
+  color: #e5e7eb;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.description-row p {
+  margin: 0;
+
+  color: #919dad;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.service-card-actions {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 9px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #253143;
+}
+
+.service-card-actions button {
+  width: 100%;
+}
+
+
+/* =========================================================
+   ORDER MOBILE
+   ========================================================= */
+
+.recycle-mobile-list {
+  display: none;
+}
+
+.recycle-card {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 19px;
+  margin-bottom: 14px;
+
+  background: linear-gradient(
+    145deg,
+    #121a25,
+    #0f161f
+  );
+
+  border: 1px solid #263244;
+  border-radius: 15px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.recycle-card:hover {
+  border-color: #35445a;
+  transform: translateY(-2px);
+}
+
+.recycle-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #253143;
+}
+
+.card-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #69778b;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.recycle-card-header h3 {
+  margin: 0;
+
+  color: #f1f5f9;
+
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.recycle-card-body {
+  padding: 18px 0;
+}
+
+.card-row {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  margin-bottom: 14px;
+}
+
+.card-row:last-child {
+  margin-bottom: 0;
+}
+
+.card-row > span {
+  color: #999;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+.card-row strong {
+  color: #f1f5f9;
+
+  font-size: 14px;
+}
+
+.recycle-card-actions {
+  display: flex;
+
+  gap: 8px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #253143;
+}
+
+.recycle-card-actions button {
+  flex: 1;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .service-recycle-bin,
+  .recycle-bin-page {
+    padding: 22px;
+  }
+
+  .service-recycle-header,
+  .recycle-bin-page .recycle-bin-header {
+    padding: 23px;
+  }
+
+  .service-recycle-table {
+    min-width: 700px;
+  }
+
+  .recycle-table {
+    min-width: 850px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+  .service-recycle-bin,
+  .recycle-bin-page {
+    padding: 16px;
+  }
+
+  .service-recycle-header,
+  .recycle-bin-page .recycle-bin-header {
+    flex-direction: column;
+    align-items: stretch;
+
+    padding: 21px;
+  }
+
+  .service-recycle-title,
+  .recycle-title {
+    align-items: flex-start;
+  }
+
+  .service-recycle-icon,
+  .recycle-icon {
+    width: 50px;
+    height: 50px;
+
+    font-size: 22px;
+  }
+
+  .service-recycle-title h2,
+  .recycle-title h1 {
+    font-size: 21px;
+  }
+
+  .service-recycle-title p,
+  .recycle-title p {
+    font-size: 12px;
+  }
+
+  .service-recycle-count,
+  .recycle-count {
+    width: 100%;
+  }
+
+  .service-recycle-toolbar,
+  .recycle-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .service-recycle-search,
+  .recycle-search {
+    width: 100%;
+  }
+
+  .service-refresh-btn,
+  .refresh-btn {
+    width: 100%;
+  }
+
+
+  /* SERVICE */
+
+  .service-recycle-table-wrapper {
+    display: none;
+  }
+
+  .service-recycle-mobile {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+  }
+
+
+  /* ORDER */
+
+  .recycle-table-container {
+    display: none;
+  }
+
+  .recycle-mobile-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+  .service-recycle-bin,
+  .recycle-bin-page {
+    padding: 12px 10px;
+  }
+
+  .service-recycle-header,
+  .recycle-bin-page .recycle-bin-header {
+    padding: 18px;
+
+    border-radius: 14px;
+  }
+
+  .service-recycle-title,
+  .recycle-title {
+    gap: 13px;
+  }
+
+  .service-recycle-icon,
+  .recycle-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 13px;
+
+    font-size: 22px;
+  }
+
+  .service-recycle-title h2,
+  .recycle-title h1 {
+    font-size: 20px;
+  }
+
+  .service-recycle-title p,
+  .recycle-title p {
+    font-size: 11px;
+  }
+
+  .service-recycle-count,
+  .recycle-count {
+    padding: 14px;
+  }
+
+  .service-recycle-count strong,
+  .recycle-count span {
+    font-size: 24px;
+  }
+
+  .service-recycle-card,
+  .recycle-card {
+    padding: 16px;
+  }
+
+  .service-card-actions,
+  .recycle-card-actions {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .service-card-actions button,
+  .recycle-card-actions button {
+    width: 100%;
+  }
+
+  .service-recycle-empty,
+  .recycle-empty {
+    padding: 55px 18px;
+  }
 }

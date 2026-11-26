@@ -1,6 +1,8 @@
 const orderService = require("../Services/order.service");
 
+// =====================================================
 // CREATE ORDER
+// =====================================================
 async function createOrder(req, res) {
   try {
     const order = await orderService.createOrder(req.body);
@@ -20,7 +22,10 @@ async function createOrder(req, res) {
     });
   }
 }
-// GET ALL ORDERS
+
+// =====================================================
+// GET ALL ACTIVE ORDERS
+// =====================================================
 async function getAllOrders(req, res) {
   try {
     const orders = await orderService.getAllOrders();
@@ -29,6 +34,7 @@ async function getAllOrders(req, res) {
       success: true,
       data: orders,
     });
+
   } catch (error) {
     console.error("GET ALL ORDERS ERROR:", error);
 
@@ -40,7 +46,35 @@ async function getAllOrders(req, res) {
   }
 }
 
+// =====================================================
+// GET RECYCLE BIN ORDERS
+// =====================================================
+async function getRecycleBinOrders(req, res) {
+  try {
+    const orders = await orderService.getRecycleBinOrders();
+
+    return res.status(200).json({
+      success: true,
+      data: orders || [],
+    });
+
+  } catch (error) {
+    console.error(
+      "GET RECYCLE BIN ORDERS ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch recycle bin orders",
+      error: error.message,
+    });
+  }
+}
+
+// =====================================================
 // GET SINGLE ORDER
+// =====================================================
 async function getSingleOrder(req, res) {
   try {
     const orderId = req.params.id;
@@ -52,7 +86,8 @@ async function getSingleOrder(req, res) {
       });
     }
 
-    const order = await orderService.getSingleOrder(orderId);
+    const order =
+      await orderService.getSingleOrder(orderId);
 
     if (!order) {
       return res.status(404).json({
@@ -67,7 +102,10 @@ async function getSingleOrder(req, res) {
     });
 
   } catch (error) {
-    console.error("GET SINGLE ORDER ERROR:", error);
+    console.error(
+      "GET SINGLE ORDER ERROR:",
+      error
+    );
 
     return res.status(500).json({
       success: false,
@@ -76,32 +114,60 @@ async function getSingleOrder(req, res) {
     });
   }
 }
+
+// =====================================================
 // UPDATE ORDER
+// =====================================================
 async function updateOrder(req, res) {
   try {
     const orderId = req.params.id;
-
     const body = req.body;
 
     const cleanData = {
-      order_status: body.order_status ?? null,
-     device_make: body.vehicle_make ?? null,
-     device_model: body.vehicle_model ?? null,
-     device_year:
-        body.vehicle_year === "" || body.vehicle_year == null
-          ? null
-          : Number(body.vehicle_year),
-     device_tag: body.vehicle_tag ?? null,
+      employee_id: body.employee_id,
+      customer_id: body.customer_id,
+      device_id: body.device_id,
+
+      order_total_price:
+        body.order_total_price,
+
+      estimated_completion_date:
+        body.estimated_completion_date,
+
+      completion_date:
+        body.completion_date,
+
+      additional_request:
+        body.additional_request,
+
+      notes_for_internal_use:
+        body.notes_for_internal_use,
+
+      notes_for_customer:
+        body.notes_for_customer,
+
+      order_status:
+        body.order_status,
+
+      services:
+        body.services,
     };
 
-    await orderService.updateOrder(orderId, cleanData);
+    await orderService.updateOrder(
+      orderId,
+      cleanData
+    );
 
     return res.status(200).json({
       success: true,
-      message: "Updated successfully",
+      message: "Order updated successfully",
     });
+
   } catch (error) {
-    console.log("UPDATE ORDER ERROR:", error);
+    console.error(
+      "UPDATE ORDER ERROR:",
+      error
+    );
 
     return res.status(500).json({
       success: false,
@@ -110,32 +176,118 @@ async function updateOrder(req, res) {
     });
   }
 }
+
+// =====================================================
+// MOVE ORDER TO RECYCLE BIN
+// =====================================================
 async function deleteOrder(req, res) {
   try {
     const orderId = req.params.id;
 
-    await orderService.deleteOrder(orderId);
+    if (!orderId) {
+      return res.status(400).json({
+        success: false,
+        message: "Order ID is required",
+      });
+    }
 
-    return res.status(200).json({
-      success: true,
-      message: "Order deleted successfully",
-    });
+    const result =
+      await orderService.deleteOrder(orderId);
+
+    return res.status(200).json(result);
 
   } catch (error) {
-    console.log("DELETE ORDER ERROR:", error);
+    console.error(
+      "DELETE ORDER ERROR:",
+      error
+    );
 
     return res.status(500).json({
       success: false,
-      message: "Failed to delete order",
+      message: "Failed to move order to recycle bin",
       error: error.message,
     });
   }
 }
 
+// =====================================================
+// RESTORE ORDER
+// =====================================================
+async function restoreOrder(req, res) {
+  try {
+    const orderId = req.params.id;
+
+    if (!orderId) {
+      return res.status(400).json({
+        success: false,
+        message: "Order ID is required",
+      });
+    }
+
+    const result =
+      await orderService.restoreOrder(orderId);
+
+    return res.status(200).json(result);
+
+  } catch (error) {
+    console.error(
+      "RESTORE ORDER ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to restore order",
+      error: error.message,
+    });
+  }
+}
+
+// =====================================================
+// PERMANENTLY DELETE ORDER
+// =====================================================
+async function permanentlyDeleteOrder(req, res) {
+  try {
+    const orderId = req.params.id;
+
+    if (!orderId) {
+      return res.status(400).json({
+        success: false,
+        message: "Order ID is required",
+      });
+    }
+
+    const result =
+      await orderService.permanentlyDeleteOrder(
+        orderId
+      );
+
+    return res.status(200).json(result);
+
+  } catch (error) {
+    console.error(
+      "PERMANENT DELETE ORDER ERROR:",
+      error
+    );
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to permanently delete order",
+      error: error.message,
+    });
+  }
+}
+
+// =====================================================
+// EXPORT
+// =====================================================
 module.exports = {
   createOrder,
   getAllOrders,
+  getRecycleBinOrders,
   getSingleOrder,
   updateOrder,
-  deleteOrder
+  deleteOrder,
+  restoreOrder,
+  permanentlyDeleteOrder,
 };

@@ -4,7 +4,11 @@ import { format } from "date-fns";
 import { useAuth } from "../../../../Context/AuthContxt.jsx";
 import employeeService from "../../../../Services/employee.service.jsx";
 import { useNavigate } from "react-router-dom";
-import { FaEdit, FaTrash, FaSearch } from "react-icons/fa";
+import {
+  FaEdit,
+  FaTrash,
+  FaSearch,
+} from "react-icons/fa";
 
 const EmployeesList = () => {
   const [employees, setEmployees] = useState([]);
@@ -17,12 +21,17 @@ const EmployeesList = () => {
   const [errorMsg, setErrorMsg] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
+
   const itemsPerPage = 5;
 
   const { employee } = useAuth();
   const navigate = useNavigate();
 
   const token = employee?.employee_token || null;
+
+  // =========================================================
+  // GET ALL EMPLOYEES
+  // =========================================================
 
   useEffect(() => {
     employeeService
@@ -32,6 +41,7 @@ const EmployeesList = () => {
           setApiError(true);
           setApiErrorMessage("Failed to load employees");
         }
+
         return res.json();
       })
       .then((data) => {
@@ -39,54 +49,109 @@ const EmployeesList = () => {
       })
       .catch((err) => {
         console.log(err);
+
         setApiError(true);
         setApiErrorMessage("Server error");
       });
   }, [token]);
 
+  // =========================================================
   // SEARCH
+  // =========================================================
+
   const filteredEmployees = employees.filter((emp) => {
     const search = searchTerm.toLowerCase();
 
     return (
-      emp.employee_id.toString().includes(search) ||
-      emp.employee_first_name.toLowerCase().includes(search) ||
-      emp.employee_last_name.toLowerCase().includes(search) ||
-      emp.employee_email.toLowerCase().includes(search) ||
-      emp.employee_phone.toLowerCase().includes(search) ||
-      emp.company_role_name.toLowerCase().includes(search)||
-      emp.added_date.toLowerCase().includes(search)||
-      (emp.active_employee ? "yes" : "no").includes(search)
+      emp.employee_id
+        .toString()
+        .includes(search) ||
+
+      emp.employee_first_name
+        .toLowerCase()
+        .includes(search) ||
+
+      emp.employee_last_name
+        .toLowerCase()
+        .includes(search) ||
+
+      emp.employee_email
+        .toLowerCase()
+        .includes(search) ||
+
+      emp.employee_phone
+        .toLowerCase()
+        .includes(search) ||
+
+      emp.company_role_name
+        .toLowerCase()
+        .includes(search) ||
+
+      emp.added_date
+        .toLowerCase()
+        .includes(search) ||
+
+      (emp.active_employee ? "yes" : "no")
+        .includes(search)
     );
   });
 
+  // =========================================================
   // PAGINATION
-  const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
+  // =========================================================
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-
-  const currentEmployees = filteredEmployees.slice(
-    startIndex,
-    startIndex + itemsPerPage
+  const totalPages = Math.ceil(
+    filteredEmployees.length / itemsPerPage
   );
 
+  const startIndex =
+    (currentPage - 1) * itemsPerPage;
+
+  const currentEmployees =
+    filteredEmployees.slice(
+      startIndex,
+      startIndex + itemsPerPage
+    );
+
+  // =========================================================
+  // EDIT EMPLOYEE
+  // =========================================================
+
   const handleEdit = (emp) => {
-    navigate(`/admin/employee/edit/${emp.employee_id}`, {
-      state: emp,
-    });
+    navigate(
+      `/admin/employee/edit/${emp.employee_id}`,
+      {
+        state: emp,
+      }
+    );
   };
+
+  // =========================================================
+  // DELETE EMPLOYEE
+  // =========================================================
 
   const handleDelete = async (id) => {
     try {
-      const res = await employeeService.deleteEmployee(id, token);
+      const res =
+        await employeeService.deleteEmployee(
+          id,
+          token
+        );
+
       const data = await res.json();
 
       if (res.ok) {
         setEmployees((prev) =>
-          prev.filter((e) => e.employee_id !== id)
+          prev.filter(
+            (e) => e.employee_id !== id
+          )
         );
 
-        setSuccessMsg(data.message || "Employee deleted successfully");
+        setSuccessMsg(
+          data.message ||
+            "Employee deleted successfully"
+        );
+
         setErrorMsg(null);
       } else {
         setErrorMsg(data.error);
@@ -94,10 +159,15 @@ const EmployeesList = () => {
       }
     } catch (err) {
       console.log(err);
+
       setErrorMsg("Delete failed");
       setSuccessMsg(null);
     }
   };
+
+  // =========================================================
+  // UI
+  // =========================================================
 
   return (
     <>
@@ -111,6 +181,7 @@ const EmployeesList = () => {
         <section className="contact-section">
           <div className="auto-container">
 
+            {/* HEADER */}
             <div
               style={{
                 display: "flex",
@@ -125,10 +196,12 @@ const EmployeesList = () => {
                 <h2>Employees</h2>
 
                 <p className="fw-bold fs-5">
-                  Total Employees: {filteredEmployees.length}
+                  Total Employees:{" "}
+                  {filteredEmployees.length}
                 </p>
               </div>
 
+              {/* SEARCH */}
               <div
                 style={{
                   position: "relative",
@@ -141,7 +214,8 @@ const EmployeesList = () => {
                     position: "absolute",
                     left: "12px",
                     top: "50%",
-                    transform: "translateY(-50%)",
+                    transform:
+                      "translateY(-50%)",
                     color: "#888",
                   }}
                 />
@@ -151,13 +225,18 @@ const EmployeesList = () => {
                   placeholder="Search employee..."
                   value={searchTerm}
                   onChange={(e) => {
-                    setSearchTerm(e.target.value);
+                    setSearchTerm(
+                      e.target.value
+                    );
+
                     setCurrentPage(1);
                   }}
                   style={{
                     width: "100%",
-                    padding: "10px 15px 10px 40px",
-                    border: "1px solid #ccc",
+                    padding:
+                      "10px 15px 10px 40px",
+                    border:
+                      "1px solid #ccc",
                     borderRadius: "8px",
                     outline: "none",
                   }}
@@ -165,20 +244,34 @@ const EmployeesList = () => {
               </div>
             </div>
 
+            {/* SUCCESS MESSAGE */}
             {successMsg && (
-              <div style={{ color: "green", marginBottom: 10 }}>
+              <div
+                style={{
+                  color: "green",
+                  marginBottom: 10,
+                }}
+              >
                 {successMsg}
               </div>
             )}
 
+            {/* ERROR MESSAGE */}
             {errorMsg && (
-              <div style={{ color: "red", marginBottom: 10 }}>
+              <div
+                style={{
+                  color: "red",
+                  marginBottom: 10,
+                }}
+              >
                 {errorMsg}
               </div>
             )}
 
+            {/* TABLE */}
             <div className="table-responsive">
               <Table striped bordered hover>
+
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -193,127 +286,215 @@ const EmployeesList = () => {
                   </tr>
                 </thead>
 
-                <tbody>                {currentEmployees.length > 0 ? (
-                  currentEmployees.map((emp, index) => (
-                    <tr key={emp.employee_id}>
-                      <td>{startIndex + index + 1}</td>
-
-                      <td>{emp.active_employee ? "Yes" : "No"}</td>
-
-                      <td>{emp.employee_first_name}</td>
-
-                      <td>{emp.employee_last_name}</td>
-
-                      <td>{emp.employee_email}</td>
-
-                      <td>{emp.employee_phone}</td>
-
-                      <td>
-                        {format(
-                          new Date(emp.added_date),
-                          "MM-dd-yyyy | kk:mm"
-                        )}
-                      </td>
-
-                      <td>{emp.company_role_name}</td>
-
-                      <td>
-                        <div
-                          style={{
-                            display: "flex",
-                            gap: "15px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
+                <tbody>
+                  {currentEmployees.length > 0 ? (
+                    currentEmployees.map(
+                      (emp, index) => (
+                        <tr
+                          key={
+                            emp.employee_id
+                          }
                         >
-                          <FaEdit
-                            style={{
-                              cursor: "pointer",
-                              color: "#0d6efd",
-                            }}
-                            title="Edit Employee"
-                            onClick={() => handleEdit(emp)}
-                          />
+                          <td>
+                            {startIndex +
+                              index +
+                              1}
+                          </td>
 
-                          <FaTrash
-                            style={{
-                              cursor: "pointer",
-                              color: "red",
-                            }}
-                            title="Delete Employee"
-                            onClick={() =>
-                              handleDelete(emp.employee_id)
+                          <td>
+                            {emp.active_employee
+                              ? "Yes"
+                              : "No"}
+                          </td>
+
+                          <td>
+                            {
+                              emp.employee_first_name
                             }
-                          />
-                        </div>
+                          </td>
+
+                          <td>
+                            {
+                              emp.employee_last_name
+                            }
+                          </td>
+
+                          <td>
+                            {
+                              emp.employee_email
+                            }
+                          </td>
+
+                          <td>
+                            {
+                              emp.employee_phone
+                            }
+                          </td>
+
+                          <td>
+                            {format(
+                              new Date(
+                                emp.added_date
+                              ),
+                              "MM-dd-yyyy | kk:mm"
+                            )}
+                          </td>
+
+                          <td>
+                            {
+                              emp.company_role_name
+                            }
+                          </td>
+
+                          <td>
+                            <div
+                              style={{
+                                display: "flex",
+                                gap: "15px",
+                                justifyContent:
+                                  "center",
+                                alignItems:
+                                  "center",
+                              }}
+                            >
+                              {/* EDIT */}
+                              <FaEdit
+                                style={{
+                                  cursor:
+                                    "pointer",
+                                  color:
+                                    "#0d6efd",
+                                }}
+                                title="Edit Employee"
+                                onClick={() =>
+                                  handleEdit(
+                                    emp
+                                  )
+                                }
+                              />
+
+                              {/* DELETE */}
+                              <FaTrash
+                                style={{
+                                  cursor:
+                                    "pointer",
+                                  color: "red",
+                                }}
+                                title="Delete Employee"
+                                onClick={() =>
+                                  handleDelete(
+                                    emp.employee_id
+                                  )
+                                }
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    )
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan="9"
+                        style={{
+                          textAlign: "center",
+                          padding: "25px",
+                          fontWeight:
+                            "bold",
+                          color: "#777",
+                        }}
+                      >
+                        No employees found.
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td
-                      colSpan="9"
-                      style={{
-                        textAlign: "center",
-                        padding: "25px",
-                        fontWeight: "bold",
-                        color: "#777",
-                      }}
-                    >
-                      No employees found.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </Table>
+                  )}
+                </tbody>
 
-            {/* PAGINATION */}
-            {filteredEmployees.length > 0 && (
-              <div className="pagination">
-                <button
-                  onClick={() => setCurrentPage(1)}
-                  disabled={currentPage === 1}
-                >
-                  « First
-                </button>
+              </Table>
 
-                <button
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  ‹ Previous
-                </button>
+              {/* =====================================================
+                  PAGINATION
+              ====================================================== */}
 
-                <span
-                  style={{
-                    padding: "8px 15px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Page {currentPage} of {totalPages}
-                </span>
+              {filteredEmployees.length > 0 && (
+                <div className="pagination">
 
-                <button
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Next ›
-                </button>
+                  {/* FIRST */}
+                  <button
+                    onClick={() =>
+                      setCurrentPage(1)
+                    }
+                    disabled={
+                      currentPage === 1
+                    }
+                  >
+                    « First
+                  </button>
 
-                <button
-                  onClick={() => setCurrentPage(totalPages)}
-                  disabled={currentPage === totalPages}
-                >
-                  Last »
-                </button>
-              </div>
-            )}
+                  {/* PREVIOUS */}
+                  <button
+                    onClick={() =>
+                      setCurrentPage(
+                        currentPage - 1
+                      )
+                    }
+                    disabled={
+                      currentPage === 1
+                    }
+                  >
+                    ‹ Previous
+                  </button>
+
+                  {/* PAGE NUMBER */}
+                  <span
+                    style={{
+                      padding: "8px 15px",
+                      fontWeight:
+                        "bold",
+                    }}
+                  >
+                    Page {currentPage} of{" "}
+                    {totalPages}
+                  </span>
+
+                  {/* NEXT */}
+                  <button
+                    onClick={() =>
+                      setCurrentPage(
+                        currentPage + 1
+                      )
+                    }
+                    disabled={
+                      currentPage ===
+                      totalPages
+                    }
+                  >
+                    Next ›
+                  </button>
+
+                  {/* LAST */}
+                  <button
+                    onClick={() =>
+                      setCurrentPage(
+                        totalPages
+                      )
+                    }
+                    disabled={
+                      currentPage ===
+                      totalPages
+                    }
+                  >
+                    Last »
+                  </button>
+
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
-    )}
-  </>
-);
+        </section>
+      )}
+    </>
+  );
 };
 
 export default EmployeesList;

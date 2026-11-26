@@ -1,0 +1,932 @@
+/* =========================================================
+   CENTRALIZED RECYCLE BIN CSS
+   Used by:
+   1. OrderRecycleBin
+   2. ServiceRecycleBin
+   3. EmployeeRecycleBin
+   4. CustomerRecycleBin
+   5. DeviceRecycleBin
+========================================================= */
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.recycle-bin-container {
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.recycle-bin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.recycle-bin-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.recycle-bin-title-icon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background: #fff1f1;
+
+  color: #d32f2f;
+
+  font-size: 24px;
+}
+
+.recycle-bin-title h2 {
+  margin: 0 0 5px;
+
+  color: #12131a;
+
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.recycle-bin-title p {
+  margin: 0;
+
+  color: #777;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   ITEM COUNT
+========================================================= */
+
+.recycle-bin-count {
+  min-width: 130px;
+
+  padding: 12px 18px;
+
+  border-radius: 10px;
+
+  background: #f7f7f7;
+
+  text-align: center;
+}
+
+.recycle-bin-count strong {
+  display: block;
+
+  color: #12131a;
+
+  font-size: 22px;
+}
+
+.recycle-bin-count span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.recycle-bin-message {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 12px 15px;
+
+  margin-bottom: 20px;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+}
+
+.recycle-bin-message.success {
+  color: #16803c;
+
+  background: #e9f9ee;
+
+  border: 1px solid #b9e9c8;
+}
+
+.recycle-bin-message.error {
+  color: #c62828;
+
+  background: #fff0f0;
+
+  border: 1px solid #f0bcbc;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.recycle-bin-toolbar {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.recycle-bin-search {
+  position: relative;
+
+  width: 100%;
+
+  max-width: 450px;
+}
+
+.recycle-bin-search-icon {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #999;
+
+  font-size: 14px;
+}
+
+.recycle-bin-search input {
+  width: 100%;
+
+  height: 44px;
+
+  box-sizing: border-box;
+
+  padding: 0 42px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #fff;
+
+  color: #12131a;
+
+  font-size: 14px;
+
+  transition: 0.2s ease;
+}
+
+.recycle-bin-search input:focus {
+  border-color: #ff6b4a;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 74, 0.1);
+}
+
+
+/* =========================================================
+   CLEAR SEARCH
+========================================================= */
+
+.recycle-bin-clear {
+  position: absolute;
+
+  right: 10px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #eee;
+
+  color: #555;
+
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+.recycle-bin-clear:hover {
+  background: #ddd;
+}
+
+
+/* =========================================================
+   REFRESH BUTTON
+========================================================= */
+
+.recycle-bin-refresh {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  height: 44px;
+
+  padding: 0 18px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #12131a;
+
+  color: #fff;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.recycle-bin-refresh:hover {
+  opacity: 0.9;
+}
+
+.recycle-bin-refresh:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   TABLE CONTAINER
+========================================================= */
+
+.recycle-bin-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid #e5e5e5;
+
+  border-radius: 10px;
+
+  background: #fff;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.recycle-bin-table {
+  width: 100%;
+
+  min-width: 850px;
+
+  border-collapse: collapse;
+}
+
+.recycle-bin-table thead {
+  background: #f7f7f7;
+}
+
+.recycle-bin-table th {
+  padding: 15px;
+
+  border-bottom: 1px solid #e5e5e5;
+
+  color: #555;
+
+  text-align: left;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.recycle-bin-table td {
+  padding: 16px 15px;
+
+  border-bottom: 1px solid #eee;
+
+  color: #333;
+
+  font-size: 14px;
+
+  vertical-align: middle;
+}
+
+.recycle-bin-table tbody tr {
+  transition: 0.2s ease;
+}
+
+.recycle-bin-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.recycle-bin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   ID
+========================================================= */
+
+.recycle-bin-id {
+  color: #777;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   DESCRIPTION / LONG TEXT
+========================================================= */
+
+.recycle-bin-description {
+  max-width: 350px;
+
+  color: #777;
+
+  line-height: 1.5;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.recycle-bin-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  background: #fff0f0;
+
+  color: #d32f2f;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.recycle-bin-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+/* =========================================================
+   RESTORE BUTTON
+========================================================= */
+
+.recycle-bin-restore {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 36px;
+
+  padding: 0 12px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #eaf7ee;
+
+  color: #16803c;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.recycle-bin-restore:hover {
+  background: #d8f0df;
+
+  transform: translateY(-1px);
+}
+
+.recycle-bin-restore:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   PERMANENT DELETE
+========================================================= */
+
+.recycle-bin-delete {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 36px;
+
+  padding: 0 12px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #fff0f0;
+
+  color: #d32f2f;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.recycle-bin-delete:hover {
+  background: #ffe0e0;
+
+  transform: translateY(-1px);
+}
+
+.recycle-bin-delete:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.recycle-bin-loading {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #777;
+}
+
+.recycle-bin-loading p {
+  margin-top: 15px;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.recycle-bin-spinner {
+  width: 35px;
+  height: 35px;
+
+  border: 3px solid #eee;
+
+  border-top-color: #ff6b4a;
+
+  border-radius: 50%;
+
+  animation: recycleBinSpin 0.8s linear infinite;
+}
+
+@keyframes recycleBinSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.recycle-bin-empty {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  border: 1px dashed #ddd;
+
+  border-radius: 10px;
+
+  background: #fff;
+
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+.recycle-bin-empty-icon {
+  width: 65px;
+  height: 65px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  border-radius: 50%;
+
+  background: #f7f7f7;
+
+  color: #999;
+
+  font-size: 28px;
+}
+
+.recycle-bin-empty h3 {
+  margin: 0 0 8px;
+
+  color: #333;
+
+  font-size: 20px;
+}
+
+.recycle-bin-empty p {
+  margin: 0;
+
+  color: #888;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   MOBILE CARD CONTAINER
+========================================================= */
+
+.recycle-bin-mobile {
+  display: none;
+}
+
+
+/* =========================================================
+   MOBILE CARD
+========================================================= */
+
+.recycle-bin-card {
+  padding: 18px;
+
+  margin-bottom: 15px;
+
+  border: 1px solid #e5e5e5;
+
+  border-radius: 10px;
+
+  background: #fff;
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.recycle-bin-card-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #eee;
+}
+
+.recycle-bin-card-header h3 {
+  margin: 0;
+
+  color: #333;
+
+  font-size: 17px;
+}
+
+.recycle-bin-card-header small {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #999;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.recycle-bin-card-content {
+  padding: 15px 0;
+}
+
+.recycle-bin-card-row {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  margin-bottom: 14px;
+}
+
+.recycle-bin-card-row:last-child {
+  margin-bottom: 0;
+}
+
+.recycle-bin-card-row > span {
+  color: #999;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+.recycle-bin-card-row strong {
+  color: #333;
+
+  font-size: 14px;
+}
+
+.recycle-bin-card-row p {
+  margin: 0;
+
+  color: #777;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   CARD ACTIONS
+========================================================= */
+
+.recycle-bin-card-actions {
+  display: flex;
+
+  gap: 8px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #eee;
+}
+
+.recycle-bin-card-actions button {
+  flex: 1;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .recycle-bin-container {
+    padding: 25px 20px;
+  }
+
+  .recycle-bin-header {
+    align-items: flex-start;
+  }
+
+  .recycle-bin-count {
+    min-width: 110px;
+  }
+
+  .recycle-bin-description {
+    max-width: 250px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .recycle-bin-container {
+    padding: 20px 15px;
+  }
+
+
+  /* HEADER */
+
+  .recycle-bin-header {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 15px;
+  }
+
+  .recycle-bin-title {
+    align-items: flex-start;
+  }
+
+  .recycle-bin-title-icon {
+    width: 45px;
+    height: 45px;
+
+    font-size: 20px;
+  }
+
+  .recycle-bin-title h2 {
+    font-size: 21px;
+  }
+
+  .recycle-bin-title p {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+  .recycle-bin-count {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+
+  /* TOOLBAR */
+
+  .recycle-bin-toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .recycle-bin-search {
+    max-width: none;
+  }
+
+  .recycle-bin-refresh {
+    width: 100%;
+  }
+
+
+  /* HIDE DESKTOP TABLE */
+
+  .recycle-bin-table-wrapper {
+    display: none;
+  }
+
+
+  /* SHOW MOBILE CARDS */
+
+  .recycle-bin-mobile {
+    display: block;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+  .recycle-bin-container {
+    padding: 15px 10px;
+  }
+
+  .recycle-bin-title h2 {
+    font-size: 19px;
+  }
+
+  .recycle-bin-title p {
+    font-size: 11px;
+  }
+
+  .recycle-bin-message {
+    font-size: 12px;
+  }
+
+  .recycle-bin-card {
+    padding: 15px;
+  }
+
+  .recycle-bin-card-actions {
+    flex-direction: column;
+  }
+
+  .recycle-bin-card-actions button {
+    width: 100%;
+  }
+}

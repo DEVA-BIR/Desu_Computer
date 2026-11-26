@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Chatbot from "../AI/Chatbot"
 function Footer() {
   return (
     <div>
@@ -40,7 +40,7 @@ function Footer() {
                                 <div className="icon">
                                     <span className="flaticon-phone"></span>
                                 </div>
-                                <div className="text">Call us on : <br></br><strong>+ 2519 897 3654</strong></div>
+                                <div className="text">Call us on : <br></br><strong>+ 2519 400 66308</strong></div>
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,6 @@ function Footer() {
                                 </div>
                             </div>                                    
                         </div>
-                        
                     
                         <div className="footer-column col-lg-4">
                             <div className="widget widget_newsletter">
@@ -113,6 +112,9 @@ function Footer() {
                                         </div>
                                     </form>
                                 </div>
+                                 <section>
+                        <Chatbot />
+                       </section>
                                 <ul className="social-links">
                                     <li><a href="#"><span className="fab fa-facebook-f"></span></a></li>
                                     <li><a href="#"><span className="fab fa-linkedin-in"></span></a></li>
@@ -128,7 +130,7 @@ function Footer() {
                 </div>
             </div>
         </div>
-        
+       
        
         <div className="auto-container">
             <div className="footer-bottom">

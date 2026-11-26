@@ -1,0 +1,483 @@
+/* =========================================================
+   DESU COMPUTER SOLUTION
+   LIGHT / DARK THEME SYSTEM
+   ========================================================= */
+
+/* =========================
+   DARK THEME
+   ========================= */
+
+:root {
+    --theme-bg: #0b0f14;
+    --theme-bg-secondary: #111827;
+    --theme-card: #1a2233;
+    --theme-card-secondary: #202b3c;
+    --theme-border: #2d3d56;
+
+    --theme-text: #ffffff;
+    --theme-text-secondary: #d1d5db;
+    --theme-text-muted: #94a3b8;
+
+    --theme-primary: #22c55e;
+    --theme-primary-hover: #16a34a;
+
+    --theme-input: #101826;
+    --theme-table: #1a2233;
+}
+
+
+/* =========================
+   LIGHT THEME
+   ========================= */
+
+html[data-theme="light"] {
+
+    --theme-bg: #f5f7fa;
+    --theme-bg-secondary: #ffffff;
+
+    --theme-card: #ffffff;
+    --theme-card-secondary: #f1f5f9;
+
+    --theme-border: #d9dee7;
+
+    --theme-text: #111827;
+    --theme-text-secondary: #374151;
+    --theme-text-muted: #6b7280;
+
+    --theme-primary: #16a34a;
+    --theme-primary-hover: #15803d;
+
+    --theme-input: #ffffff;
+    --theme-table: #ffffff;
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+html,
+body,
+#root,
+.page-wrapper {
+    background: var(--theme-bg) !important;
+    color: var(--theme-text) !important;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6 {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme="light"] p,
+html[data-theme="light"] span,
+html[data-theme="light"] li,
+html[data-theme="light"] small {
+    color: var(--theme-text-secondary) !important;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+html[data-theme="light"] .main-header {
+    background: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+html[data-theme="light"] .header-top {
+    background: #f8fafc !important;
+}
+
+html[data-theme="light"] .header-upper {
+    background: #ffffff !important;
+}
+
+html[data-theme="light"] .main-menu .navigation > li > a {
+    color: #111827 !important;
+}
+
+html[data-theme="light"] .main-menu .navigation > li > a:hover,
+html[data-theme="light"] .main-menu .navigation > li.current > a {
+    color: var(--theme-primary) !important;
+}
+
+html[data-theme="light"] .main-menu .navigation > li > ul {
+    background: #ffffff !important;
+}
+
+html[data-theme="light"] .main-menu .navigation > li > ul > li > a {
+    color: #111827 !important;
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+html[data-theme="light"] .banner-section,
+html[data-theme="light"] .video-section,
+html[data-theme="light"] .services-section,
+html[data-theme="light"] .team-section,
+html[data-theme="light"] .blog-section {
+    background: var(--theme-bg) !important;
+}
+
+html[data-theme="light"] .about-section,
+html[data-theme="light"] .why-choose-us,
+html[data-theme="light"] .testimonial-section,
+html[data-theme="light"] .contact-section {
+    background: var(--theme-bg-secondary) !important;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+html[data-theme="light"] .card,
+html[data-theme="light"] .service-item,
+html[data-theme="light"] .dashboard-card,
+html[data-theme="light"] .info-card,
+html[data-theme="light"] .service-box,
+html[data-theme="light"] .device-card,
+html[data-theme="light"] .selected-customer,
+html[data-theme="light"] .external-container,
+html[data-theme="light"] .add-order-container,
+html[data-theme="light"] .device-display,
+html[data-theme="light"] .devices-wrapper,
+html[data-theme="light"] .device-form-container,
+html[data-theme="light"] .service-list {
+    background: var(--theme-card) !important;
+    color: var(--theme-text) !important;
+    border-color: var(--theme-border) !important;
+}
+
+
+/* =========================================================
+   CARD TEXT
+   ========================================================= */
+
+html[data-theme="light"] .dashboard-card h3,
+html[data-theme="light"] .info-card h3,
+html[data-theme="light"] .service-box h2,
+html[data-theme="light"] .service-item h4,
+html[data-theme="light"] .device-card h3,
+html[data-theme="light"] .section-content h2 {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme="light"] .dashboard-card p,
+html[data-theme="light"] .info-card p,
+html[data-theme="light"] .service-box p,
+html[data-theme="light"] .service-item p,
+html[data-theme="light"] .device-card p {
+    color: var(--theme-text-secondary) !important;
+}
+
+
+/* =========================================================
+   ADMIN SIDEBAR
+   ========================================================= */
+
+html[data-theme="light"] .admin-left-side {
+    background: #ffffff !important;
+    border-right: 1px solid var(--theme-border) !important;
+}
+
+html[data-theme="light"] .admin-menu {
+    background: #f8fafc !important;
+}
+
+html[data-theme="light"] .admin-menu h2 {
+    color: #111827 !important;
+}
+
+html[data-theme="light"] .admin-left-side .list-group-item {
+    background: #ffffff !important;
+    color: #374151 !important;
+    border-color: var(--theme-border) !important;
+}
+
+html[data-theme="light"] .admin-left-side .list-group-item:hover {
+    background: #f0fdf4 !important;
+    color: var(--theme-primary) !important;
+}
+
+html[data-theme="light"] .admin-left-side .list-group-item.active {
+    background: var(--theme-primary) !important;
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   ADMIN RIGHT SIDE
+   ========================================================= */
+
+html[data-theme="light"] .admin-right-side,
+html[data-theme="light"] .dashboard-body,
+html[data-theme="light"] .customer-page,
+html[data-theme="light"] .track-wrapper,
+html[data-theme="light"] .admin-edit-container {
+    background: var(--theme-bg) !important;
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+html[data-theme="light"] input,
+html[data-theme="light"] textarea,
+html[data-theme="light"] select,
+html[data-theme="light"] .form-group input,
+html[data-theme="light"] .form-group select,
+html[data-theme="light"] .form-group textarea {
+    background: var(--theme-input) !important;
+    color: var(--theme-text) !important;
+    border-color: var(--theme-border) !important;
+}
+
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder {
+    color: var(--theme-text-muted) !important;
+}
+
+html[data-theme="light"] input:focus,
+html[data-theme="light"] textarea:focus,
+html[data-theme="light"] select:focus {
+    border-color: var(--theme-primary) !important;
+}
+
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+html[data-theme="light"] .orders-table,
+html[data-theme="light"] .table {
+    background: var(--theme-table) !important;
+}
+
+html[data-theme="light"] .orders-table th,
+html[data-theme="light"] .table th {
+    background: var(--theme-primary) !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="light"] .orders-table td,
+html[data-theme="light"] .table td {
+    background: #ffffff !important;
+    color: #374151 !important;
+    border-color: var(--theme-border) !important;
+}
+
+html[data-theme="light"] .orders-table tr:hover,
+html[data-theme="light"] .table tbody tr:hover {
+    background: #f0fdf4 !important;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+html[data-theme="light"] .theme-btn,
+html[data-theme="light"] .btn-primary,
+html[data-theme="light"] .submit-btn {
+    background: var(--theme-primary) !important;
+    border-color: var(--theme-primary) !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="light"] .theme-btn:hover,
+html[data-theme="light"] .btn-primary:hover,
+html[data-theme="light"] .submit-btn:hover {
+    background: var(--theme-primary-hover) !important;
+}
+
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+html[data-theme="light"] .page-link,
+html[data-theme="light"] .pagination button {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: var(--theme-border) !important;
+}
+
+html[data-theme="light"] .page-link:hover,
+html[data-theme="light"] .pagination button:hover {
+    background: var(--theme-primary) !important;
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   GREEN ACCENTS
+   ========================================================= */
+
+html[data-theme="light"] .validation-error,
+html[data-theme="light"] .form-close,
+html[data-theme="light"] .edit-btn,
+html[data-theme="light"] .service-icons,
+html[data-theme="light"] .card-icon,
+html[data-theme="light"] .contact-info-widget .icon {
+    color: var(--theme-primary) !important;
+}
+
+html[data-theme="light"] .title-line,
+html[data-theme="light"] .dashboard-header h1::after {
+    background: var(--theme-primary) !important;
+}
+
+html[data-theme="light"] .circle-box {
+    background: var(--theme-primary) !important;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+html[data-theme="light"] .main-footer {
+    background: #e5e7eb !important;
+}
+
+html[data-theme="light"] .footer-bottom {
+    background: #d1d5db !important;
+}
+
+html[data-theme="light"] .main-footer h2,
+html[data-theme="light"] .main-footer h3,
+html[data-theme="light"] .main-footer h4 {
+    color: #111827 !important;
+}
+
+html[data-theme="light"] .main-footer p,
+html[data-theme="light"] .main-footer li,
+html[data-theme="light"] .main-footer span {
+    color: #4b5563 !important;
+}
+
+
+/* =========================================================
+   THEME TRANSITION
+   ========================================================= */
+
+body,
+section,
+header,
+footer,
+.card,
+.dashboard-card,
+.service-item,
+.info-card,
+.service-box,
+.device-card,
+input,
+textarea,
+select,
+table,
+.admin-left-side,
+.admin-right-side {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid var(--theme-border);
+    border-radius: 50%;
+
+    background: var(--theme-card);
+    color: var(--theme-text);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(20deg) scale(1.08);
+    border-color: var(--theme-primary);
+}
+/* =========================================================
+   LIGHT THEME — FOOTER FIX
+   ========================================================= */
+
+html[data-theme="light"] .main-footer {
+    background: #e5e7eb !important;
+}
+
+/* Footer headings */
+html[data-theme="light"] .main-footer h2,
+html[data-theme="light"] .main-footer h3,
+html[data-theme="light"] .main-footer h4,
+html[data-theme="light"] .main-footer h5 {
+    color: #111827 !important;
+}
+
+/* Footer paragraphs and normal text */
+html[data-theme="light"] .main-footer p,
+html[data-theme="light"] .main-footer span,
+html[data-theme="light"] .main-footer li {
+    color: #374151 !important;
+}
+
+/* Footer links */
+html[data-theme="light"] .main-footer a {
+    color: #374151 !important;
+}
+
+/* Footer links on hover */
+html[data-theme="light"] .main-footer a:hover {
+    color: #16a34a !important;
+}
+
+/* Footer icons */
+html[data-theme="light"] .main-footer i,
+html[data-theme="light"] .main-footer .icon {
+    color: #16a34a !important;
+}
+
+/* Footer bottom section */
+html[data-theme="light"] .footer-bottom {
+    background: #d1d5db !important;
+}
+
+html[data-theme="light"] .footer-bottom p,
+html[data-theme="light"] .footer-bottom span,
+html[data-theme="light"] .footer-bottom li,
+html[data-theme="light"] .footer-bottom a {
+    color: #374151 !important;
+}
+
+html[data-theme="light"] .footer-bottom a:hover {
+    color: #16a34a !important;
+}

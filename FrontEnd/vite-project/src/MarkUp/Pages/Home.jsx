@@ -7,6 +7,7 @@ import RE4 from "../../assets/Images/background/RE42.jpeg";
 import RE5 from "../../assets/Images/background/RE_5.jpeg";
 import RE8 from "../../assets/Images/background/RE8.jpeg";
 
+
 function Home() {
   return (
     <div>
